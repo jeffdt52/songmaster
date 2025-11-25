@@ -1,21 +1,35 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-songmaster_api.py – FastAPI service for Songmaster
+songmaster_api.py – FastAPI service for Songmaster + private tools
 
 Features:
 - Guest UI (Pornhub-inspired dark theme): query → suggestions → pick → name → thank-you
 - Performer UI (live-updating): shows request queue, auto-refreshes every 5s
 - JSON API:
-    POST /api/search    { "prompt": "..." } → { results: [...] }
-    POST /api/request   { "prompt": "...", "song_idx": int, "name": "..." }
-    GET  /api/requests  → [ request records... ]
-- Discord notifications on each new request using a channel webhook.
+    POST /api/search      { "prompt": "..." }           → { results: [...] }
+    POST /api/request     { "prompt": "...", ... }      → { status: "ok", id: ... }
+    GET  /api/requests    → [ request records... ]
+
+- Discord notifications on each new request via webhook.
+
+- Scaffolded private tools (for future expansion):
+    JeffGPT:
+      GET  /journal?code=Jeff
+      POST /api/jm/chat
+
+    Music CRM:
+      GET  /crm?code=Jeff
+      POST /api/crm/draft_email
+
+    Portfolio helper (read-only advisory):
+      GET  /portfolio?code=Jeff
+      POST /api/portfolio/plan
 
 Environment variables:
-- OPENAI_API_KEY                – required for SongBrain
+- OPENAI_API_KEY                 – used indirectly by SongBrain
 - SONGMASTER_DISCORD_WEBHOOK_URL – Discord webhook URL for notifications
-- SONGMASTER_PERFORMER_CODE     – optional; if set, /performer requires ?code=...
+- SONGMASTER_PERFORMER_CODE      – optional; if set, private views require ?code=...
 """
 
 import json
@@ -42,7 +56,7 @@ DISCORD_WEBHOOK_URL = os.environ.get("SONGMASTER_DISCORD_WEBHOOK_URL", "").strip
 
 # ── APP SETUP ────────────────────────────────────────────────────────────────
 
-app = FastAPI(title="Songmaster API", version="0.2.0")
+app = FastAPI(title="Songmaster API", version="0.3.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -59,7 +73,7 @@ except Exception as e:
     raise RuntimeError(f"Failed to initialize SongBrain: {e}") from e
 
 
-# ── MODELS ───────────────────────────────────────────────────────────────────
+# ── MODELS – SONGMASTER ──────────────────────────────────────────────────────
 
 class SongResult(BaseModel):
     song_idx: int
@@ -168,18 +182,23 @@ def send_discord_notification(rec: RequestRecord) -> None:
 
 def require_performer(request: Request):
     """
-    Simple guard for /performer: ?code=SECRET
-    If SONGMASTER_PERFORMER_CODE is empty, no protection.
+    Simple guard for performer/private views: ?code=<SECRET>
+
+    - If SONGMASTER_PERFORMER_CODE is empty, no protection.
+    - Otherwise, compares code case-insensitively, trimming whitespace.
     """
     if not PERFORMER_CODE:
         return
-    code = request.query_params.get("code", "").strip()
-    if code != PERFORMER_CODE:
+    expected = PERFORMER_CODE.strip().lower()
+    if not expected:
+        return
+    code = request.query_params.get("code", "").strip().lower()
+    if code != expected:
         raise HTTPException(status_code=403, detail="Forbidden")
     return
 
 
-# ── API ENDPOINTS – SEARCH / REQUESTS ────────────────────────────────────────
+# ── API ENDPOINTS – SONGMASTER SEARCH / REQUESTS ────────────────────────────
 
 @app.post("/api/search", response_model=SearchResponse)
 async def api_search(req: SearchRequest):
@@ -813,3 +832,359 @@ setInterval(fetchRequests, 5000);
 </html>
 """
     return HTMLResponse(html)
+
+
+# ── JEFFGPT (JOURNALMASTER ONLINE) – SCAFFOLD ────────────────────────────────
+
+class JMChatTurn(BaseModel):
+    role: str
+    content: str
+
+
+class JMChatRequest(BaseModel):
+    history: List[JMChatTurn] = Field(default_factory=list)
+    message: str = Field(..., min_length=1, max_length=4000)
+
+
+class JMChatResponse(BaseModel):
+    reply: str
+
+
+@app.get("/journal", response_class=HTMLResponse)
+async def journal_page(dep=Depends(require_performer)):
+    """
+    Placeholder page for JeffGPT (Journalmaster Online).
+    Later this becomes a full chat UI talking to your personal corpus.
+    """
+    html = """
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JeffGPT • Journalmaster Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1d1d1d 0, #050505 60%, #000 100%);
+      color: #f5f5f5;
+    }
+    .shell {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+    .logo-main {
+      color: #ffffff;
+    }
+    .logo-pill {
+      background: #ff9900;
+      color: #000;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+    }
+    .card {
+      margin-top: 0.8rem;
+      background: #151515;
+      border-radius: 10px;
+      border: 1px solid #2a2a2a;
+      padding: 0.9rem;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #c3c3c3;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="logo">
+      <span class="logo-main">Jeff</span>
+      <span class="logo-pill">GPT</span>
+    </div>
+    <div class="card">
+      <p>This will be your private, memory-augmented reflection partner.</p>
+      <p>Plan:</p>
+      <ul>
+        <li>Load 10+ years of journals and transcripts (exported from Loom/Journalmaster).</li>
+        <li>Use semantic search to pull in relevant memories for each question.</li>
+        <li>Call an LLM with that context to have “therapy-like” conversations (without pretending to be a therapist).</li>
+      </ul>
+      <p>Right now this is just a placeholder. The API endpoint <code>/api/jm/chat</code> is wired as a stub and can be expanded once the JeffGPT brain is built.</p>
+    </div>
+  </div>
+</body>
+</html>
+"""
+    return HTMLResponse(html)
+
+
+@app.post("/api/jm/chat", response_model=JMChatResponse)
+async def api_jm_chat(req: JMChatRequest, dep=Depends(require_performer)):
+    """
+    Scaffold endpoint for JeffGPT chat.
+
+    For now this just echoes that it's not implemented yet.
+    Later it will:
+      - run retrieval over your journal corpus
+      - call OpenAI with those snippets + conversation history
+      - return a reflective response
+    """
+    reply = (
+        "JeffGPT isn’t wired up yet in this deployment, "
+        "but this is where your journal-aware responses will come from.\n\n"
+        f"You said: {req.message}"
+    )
+    return JMChatResponse(reply=reply)
+
+
+# ── MUSIC CRM – SCAFFOLD ─────────────────────────────────────────────────────
+
+class CRMDraftRequest(BaseModel):
+    contact_name: Optional[str] = Field(default=None, max_length=200)
+    venue_type: Optional[str] = Field(default=None, max_length=200)
+    notes: Optional[str] = Field(
+        default=None,
+        description="Free-form notes about the context, e.g. 'upscale restaurant in Durango, wants mellow jazz'.",
+    )
+
+
+class CRMDraftResponse(BaseModel):
+    subject: str
+    body: str
+
+
+@app.get("/crm", response_class=HTMLResponse)
+async def crm_page(dep=Depends(require_performer)):
+    """
+    Placeholder page for a future music-contacts CRM assistant.
+    """
+    html = """
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Music CRM • Outreach Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1d1d1d 0, #050505 60%, #000 100%);
+      color: #f5f5f5;
+    }
+    .shell {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+    .logo-main {
+      color: #ffffff;
+    }
+    .logo-pill {
+      background: #ff9900;
+      color: #000;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+    }
+    .card {
+      margin-top: 0.8rem;
+      background: #151515;
+      border-radius: 10px;
+      border: 1px solid #2a2a2a;
+      padding: 0.9rem;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #c3c3c3;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="logo">
+      <span class="logo-main">Music</span>
+      <span class="logo-pill">CRM</span>
+    </div>
+    <div class="card">
+      <p>This will become your gig/outreach assistant:</p>
+      <ul>
+        <li>Knows your contacts and venue history.</li>
+        <li>Suggests which template + links to use when emailing managers.</li>
+        <li>Drafts emails like “reach out to the manager of RestaurantXYZ”.</li>
+      </ul>
+      <p>Right now <code>/api/crm/draft_email</code> is a stub endpoint; it just returns a placeholder draft.</p>
+    </div>
+  </div>
+</body>
+</html>
+"""
+    return HTMLResponse(html)
+
+
+@app.post("/api/crm/draft_email", response_model=CRMDraftResponse)
+async def api_crm_draft_email(payload: CRMDraftRequest, dep=Depends(require_performer)):
+    """
+    Scaffold endpoint for CRM email drafting.
+
+    For now:
+      - Ignores payload details and returns a simple placeholder draft.
+    Later:
+      - Will look up the contact and venue history
+      - Choose templates / links
+      - Call an LLM to draft a tailored email
+    """
+    contact = payload.contact_name or "there"
+    subject = "Live music inquiry"
+    body_lines = [
+        f"Hi {contact},",
+        "",
+        "This is a placeholder from your future music CRM assistant.",
+        "Once wired, this will draft a tailored email using your templates,",
+        "venue type, prior notes, and links to your best reels.",
+        "",
+        "— Jeff",
+    ]
+    return CRMDraftResponse(subject=subject, body="\n".join(body_lines))
+
+
+# ── PORTFOLIO HELPER – SCAFFOLD (READ-ONLY ADVISORY) ─────────────────────────
+
+class Holding(BaseModel):
+    symbol: str
+    basis_price: Optional[float] = None
+    current_price: Optional[float] = None
+    allocation_pct: Optional[float] = None
+
+
+class PortfolioPlanRequest(BaseModel):
+    holdings: List[Holding] = Field(
+        default_factory=list,
+        description="Current positions you care about (symbol, basis, current, allocation).",
+    )
+    risk_notes: Optional[str] = Field(
+        default=None,
+        description="Free text about your risk tolerance, e.g. 'slightly more conservative than big players; avoid huge drawdowns.'",
+    )
+
+
+class PortfolioPlanResponse(BaseModel):
+    summary: str
+
+
+@app.get("/portfolio", response_class=HTMLResponse)
+async def portfolio_page(dep=Depends(require_performer)):
+    """
+    Placeholder page for a future portfolio helper (read-only advisory).
+    """
+    html = """
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Portfolio Helper • Defensive Planning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: radial-gradient(circle at top, #1d1d1d 0, #050505 60%, #000 100%);
+      color: #f5f5f5;
+    }
+    .shell {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+    .logo-main {
+      color: #ffffff;
+    }
+    .logo-pill {
+      background: #ff9900;
+      color: #000;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+    }
+    .card {
+      margin-top: 0.8rem;
+      background: #151515;
+      border-radius: 10px;
+      border: 1px solid #2a2a2a;
+      padding: 0.9rem;
+    }
+    p {
+      font-size: 0.9rem;
+      color: #c3c3c3;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="logo">
+      <span class="logo-main">Portfolio</span>
+      <span class="logo-pill">Helper</span>
+    </div>
+    <div class="card">
+      <p>This will eventually help you think through defensive rules:</p>
+      <ul>
+        <li>Summarize your current positions.</li>
+        <li>Propose rules-of-thumb for protective exits (read-only; no auto-trading).</li>
+        <li>Help you stay a bit more conservative than big players in selloffs.</li>
+      </ul>
+      <p>Endpoint <code>/api/portfolio/plan</code> currently returns a stub summary and will be wired to an LLM later.</p>
+    </div>
+  </div>
+</body>
+</html>
+"""
+    return HTMLResponse(html)
+
+
+@app.post("/api/portfolio/plan", response_model=PortfolioPlanResponse)
+async def api_portfolio_plan(payload: PortfolioPlanRequest, dep=Depends(require_performer)):
+    """
+    Scaffold endpoint for portfolio planning helper.
+
+    For now:
+      - Returns a static summary acknowledging the request.
+    Later:
+      - Will call an LLM with your holdings + risk notes to suggest defensive rules.
+    """
+    symbols = ", ".join(sorted({h.symbol.upper() for h in payload.holdings})) or "no symbols provided"
+    summary = (
+        "This is a placeholder for your portfolio planning helper.\n\n"
+        f"Symbols mentioned: {symbols}\n\n"
+        "Once wired, this endpoint will:\n"
+        "- Read your positions and risk notes.\n"
+        "- Suggest protective rules (e.g., trailing stops, max drawdowns) as *advice only*.\n"
+        "- Leave actual order entry to you in Vanguard/Kraken/etc."
+    )
+    return PortfolioPlanResponse(summary=summary)
