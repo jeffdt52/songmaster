@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+song_requests.jsonl
