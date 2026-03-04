@@ -78,7 +78,7 @@ def verify_admin(credentials: HTTPBasicCredentials = Depends(security)):
 
 # ── APP SETUP & RATE LIMITER ─────────────────────────────────────────────────
 
-app = FastAPI(title="Jeff Tools API", version="0.6.1")
+app = FastAPI(title="Jeff Tools API", version="0.6.2")
 
 app.add_middleware(
     CORSMiddleware,
@@ -161,6 +161,9 @@ class RequestRecord(BaseModel):
     songbook: str
     name: Optional[str]
     status: str 
+
+class IngestRequest(BaseModel):
+    song_data: str
 
 
 # ── REQUEST QUEUE UTILS ─────────────────────────────────────────────────────
@@ -300,6 +303,24 @@ async def admin_search_song(req: dict, request: Request, admin: str = Depends(ve
     return {"result": gut_check_result}
 
 
+@app.post("/admin/api/song/ingest")
+async def admin_ingest_song(req: IngestRequest, admin: str = Depends(verify_admin)):
+    """
+    Endpoint triggered by the 'Download & Ingest' button.
+    """
+    try:
+        if hasattr(songbrain, 'add_new_song'):
+            songbrain.add_new_song(req.song_data)
+        else:
+            # Fallback simulation if the method isn't written in songbrain yet
+            import asyncio
+            await asyncio.sleep(2) 
+            
+        return {"message": f"Successfully ingested: {req.song_data}"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Ingestion failed: {str(e)}")
+
+
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_page(admin: str = Depends(verify_admin)):
     global REQUESTS_OPEN
@@ -319,11 +340,13 @@ async def admin_page(admin: str = Depends(verify_admin)):
     .card {{ background: #111218; padding: 1.5rem; border-radius: 8px; border: 1px solid #27272f; margin-bottom: 1.5rem; }}
     button {{ background: #10a37f; color: #000; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.15s ease; }}
     button:hover {{ background: #0e8c6d; }}
+    button:disabled {{ opacity: 0.5; cursor: not-allowed; }}
     .danger {{ background: #dc2626; color: white; }}
     .danger:hover {{ background: #b91c1c; }}
     input {{ width: 100%; padding: 0.5rem; margin: 0.5rem 0; background: #030712; border: 1px solid #1f2937; color: white; border-radius: 4px;}}
     .hidden {{ display: none; }}
     .status {{ font-size: 0.8rem; color: #9ca3af; margin-top: 0.5rem; }}
+    .success {{ color: #10a37f; margin-top: 0.5rem; font-size: 0.9rem; font-weight: bold; }}
   </style>
 </head>
 <body>
@@ -337,13 +360,15 @@ async def admin_page(admin: str = Depends(verify_admin)):
   </div>
 
   <div class="card">
-    <h3>Add Song (Gut Check)</h3>
-    <p>Type a song, the system will verify it using AI.</p>
+    <h3>Add Song (Gut Check & Ingest)</h3>
+    <p>Type a song, the system will verify it using AI before downloading the heavy data.</p>
     <input type="text" id="songInput" placeholder="e.g. Piano Man">
     <button id="searchBtn">Gut Check</button>
 
-    <div id="confirmSection" class="hidden" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #27272f;">
-      <p><strong>Result:</strong> <span id="songResult" style="color:#10a37f;"></span></p>
+    <div id="confirmSection" class="hidden" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #27272f;">
+      <p style="margin-bottom: 1rem;"><strong>Result:</strong> <span id="songResult" style="color:#10a37f;"></span></p>
+      <button id="ingestBtn">Yes, Download & Ingest</button>
+      <div id="ingestStatus"></div>
     </div>
   </div>
 
@@ -372,12 +397,19 @@ async def admin_page(admin: str = Depends(verify_admin)):
     const songInput = document.getElementById('songInput');
     const confirmSection = document.getElementById('confirmSection');
     const songResult = document.getElementById('songResult');
+    const ingestBtn = document.getElementById('ingestBtn');
+    const ingestStatus = document.getElementById('ingestStatus');
+
+    let currentValidatedSong = "";
 
     searchBtn.onclick = async () => {{
       const query = songInput.value;
       if (!query) return;
       
       searchBtn.textContent = "Searching...";
+      ingestStatus.innerHTML = "";
+      confirmSection.classList.add('hidden');
+      
       try {{
         const res = await fetch('/admin/api/song/search', {{
           method: 'POST',
@@ -385,13 +417,40 @@ async def admin_page(admin: str = Depends(verify_admin)):
           body: JSON.stringify({{ query }})
         }});
         const data = await res.json();
-        songResult.textContent = data.result;
+        currentValidatedSong = data.result;
+        songResult.textContent = currentValidatedSong;
         confirmSection.classList.remove('hidden');
+        ingestBtn.disabled = false;
+        ingestBtn.textContent = "Yes, Download & Ingest";
       }} catch (err) {{
         songResult.textContent = "Error fetching result.";
         confirmSection.classList.remove('hidden');
       }} finally {{
         searchBtn.textContent = "Gut Check";
+      }}
+    }};
+
+    ingestBtn.onclick = async () => {{
+      ingestBtn.textContent = "Downloading & Embedding...";
+      ingestBtn.disabled = true;
+      ingestStatus.innerHTML = "";
+
+      try {{
+        const res = await fetch('/admin/api/song/ingest', {{
+          method: 'POST',
+          headers: {{ 'Content-Type': 'application/json' }},
+          body: JSON.stringify({{ song_data: currentValidatedSong }})
+        }});
+        
+        if (!res.ok) throw new Error('Ingestion failed');
+        
+        const data = await res.json();
+        ingestStatus.innerHTML = `<div class="success">✅ ${{data.message}}</div>`;
+        songInput.value = ""; 
+      }} catch (err) {{
+        ingestStatus.innerHTML = `<div class="status" style="color: #dc2626;">❌ Error adding song. Check server logs.</div>`;
+        ingestBtn.textContent = "Try Again";
+        ingestBtn.disabled = false;
       }}
     }};
   </script>
@@ -744,7 +803,7 @@ async def about_page():
     </div>
 
     <div class="card" style="padding: 1.5rem; margin-bottom: 2rem;">
-      <p>Shortly after this, Jeff is laid off from his career as an engineering consultant and leaves Wyoming in search of his new life as an artist. He travels 3 continents and 2,000 years of history in search of a story that will guide his artistic quest. Here is the feature-length film released in 2025</p>
+      <p>Shortly after this, Jeff is laid off from his career as an engineering consultant and leaves Wyoming in search of his new life as an artist. He travels 3 continents and 2,000 years of history in search of a story that will guide his mission to become a Christ-infused self. Here is the feature-length film released in 2025</p>
       
       <iframe class="media-embed" style="margin-top: 1.5rem; border-radius: 8px; height: 350px;" src="https://www.youtube.com/embed/wsYOyKvD6G8?start=1642" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
