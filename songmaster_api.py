@@ -6,6 +6,7 @@ songmaster_api.py – FastAPI service for Songmaster + private tools
 Features:
 - Guest UI (Spotify Pink Parallax): query → suggestions → pick → name → thank-you
 - About Page (/about): Digital business card and hireable offerings.
+- Admin UI (/admin): Global kill switch and AI gut check, protected by basic auth.
 - Performer UI (live-updating): shows request queue, auto-refreshes every 5s
 - JSON API with Rate Limiting and Admin Kill Switch.
 """
@@ -77,7 +78,7 @@ def verify_admin(credentials: HTTPBasicCredentials = Depends(security)):
 
 # ── APP SETUP & RATE LIMITER ─────────────────────────────────────────────────
 
-app = FastAPI(title="Jeff Tools API", version="0.6.0")
+app = FastAPI(title="Jeff Tools API", version="0.6.1")
 
 app.add_middleware(
     CORSMiddleware,
@@ -87,8 +88,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static folder for the background image
-# Create a 'static' folder in the same directory as this file and put background.png there.
 static_dir = BASE_DIR / "static"
 if static_dir.exists():
     app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
@@ -272,7 +271,7 @@ async def api_get_requests(dep=Depends(require_performer)):
     return records
 
 
-# ── ADMIN API ENDPOINTS (KILL SWITCH & INGESTION) ───────────────────────────
+# ── ADMIN API ENDPOINTS & PAGE ──────────────────────────────────────────────
 
 @app.post("/admin/api/toggle")
 async def toggle_requests(request: Request, admin: str = Depends(verify_admin)):
@@ -299,6 +298,107 @@ async def admin_search_song(req: dict, request: Request, admin: str = Depends(ve
         gut_check_result = f"Error reaching OpenAI: {e}"
         
     return {"result": gut_check_result}
+
+
+@app.get("/admin", response_class=HTMLResponse)
+async def admin_page(admin: str = Depends(verify_admin)):
+    global REQUESTS_OPEN
+    btn_text = "Close Requests" if REQUESTS_OPEN else "Open Requests"
+    btn_class = "danger" if REQUESTS_OPEN else ""
+    sys_status = "System is OPEN." if REQUESTS_OPEN else "System is CLOSED. The guest UI will reject inputs."
+    
+    html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Songmaster Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {{ font-family: system-ui, sans-serif; background: #050509; color: #e5e7eb; padding: 2rem; max-width: 600px; margin: auto; }}
+    .card {{ background: #111218; padding: 1.5rem; border-radius: 8px; border: 1px solid #27272f; margin-bottom: 1.5rem; }}
+    button {{ background: #10a37f; color: #000; border: none; padding: 0.5rem 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.15s ease; }}
+    button:hover {{ background: #0e8c6d; }}
+    .danger {{ background: #dc2626; color: white; }}
+    .danger:hover {{ background: #b91c1c; }}
+    input {{ width: 100%; padding: 0.5rem; margin: 0.5rem 0; background: #030712; border: 1px solid #1f2937; color: white; border-radius: 4px;}}
+    .hidden {{ display: none; }}
+    .status {{ font-size: 0.8rem; color: #9ca3af; margin-top: 0.5rem; }}
+  </style>
+</head>
+<body>
+  <h2>🎹 Songmaster Admin</h2>
+
+  <div class="card">
+    <h3>Global Kill Switch</h3>
+    <p>Currently, the guest UI can make requests.</p>
+    <button id="toggleBtn" class="{btn_class}">{btn_text}</button>
+    <div id="toggleStatus" class="status">{sys_status}</div>
+  </div>
+
+  <div class="card">
+    <h3>Add Song (Gut Check)</h3>
+    <p>Type a song, the system will verify it using AI.</p>
+    <input type="text" id="songInput" placeholder="e.g. Piano Man">
+    <button id="searchBtn">Gut Check</button>
+
+    <div id="confirmSection" class="hidden" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #27272f;">
+      <p><strong>Result:</strong> <span id="songResult" style="color:#10a37f;"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const toggleStatus = document.getElementById('toggleStatus');
+    let isOpen = {'true' if REQUESTS_OPEN else 'false'};
+
+    toggleBtn.onclick = async () => {{
+      const res = await fetch('/admin/api/toggle', {{ method: 'POST' }});
+      if (res.ok) {{
+        isOpen = !isOpen;
+        if (isOpen) {{
+          toggleBtn.textContent = "Close Requests";
+          toggleBtn.className = "danger";
+          toggleStatus.textContent = "System is OPEN.";
+        }} else {{
+          toggleBtn.textContent = "Open Requests";
+          toggleBtn.className = "";
+          toggleStatus.textContent = "System is CLOSED. The guest UI will reject inputs.";
+        }}
+      }}
+    }};
+
+    const searchBtn = document.getElementById('searchBtn');
+    const songInput = document.getElementById('songInput');
+    const confirmSection = document.getElementById('confirmSection');
+    const songResult = document.getElementById('songResult');
+
+    searchBtn.onclick = async () => {{
+      const query = songInput.value;
+      if (!query) return;
+      
+      searchBtn.textContent = "Searching...";
+      try {{
+        const res = await fetch('/admin/api/song/search', {{
+          method: 'POST',
+          headers: {{ 'Content-Type': 'application/json' }},
+          body: JSON.stringify({{ query }})
+        }});
+        const data = await res.json();
+        songResult.textContent = data.result;
+        confirmSection.classList.remove('hidden');
+      }} catch (err) {{
+        songResult.textContent = "Error fetching result.";
+        confirmSection.classList.remove('hidden');
+      }} finally {{
+        searchBtn.textContent = "Gut Check";
+      }}
+    }};
+  </script>
+</body>
+</html>
+"""
+    return HTMLResponse(html)
 
 
 # ── PAGE ENDPOINTS (HTML) ───────────────────────────────────────────────────
@@ -604,7 +704,7 @@ async def about_page():
     
     <div class="grid">
       <div class="gig-card">
-        <iframe class="media-embed" src="https://www.youtube.com/embed/AH2m83kmvx4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="media-embed" src="https://www.youtube.com/embed/2lrCJYvOIBs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="gig-info">
           <div class="gig-title">Lively Pianobar (Party)</div>
           <div class="gig-desc">High-energy, request-driven, and interactive live sets powered by Jeff's music request app. Perfect for lively rooms.</div>
@@ -620,7 +720,7 @@ async def about_page():
       </div>
 
       <div class="gig-card">
-        <iframe class="media-embed" src="https://www.youtube.com/embed/QsSnydAAKI8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="media-embed" src="https://www.youtube.com/embed/AH2m83kmvx4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="gig-info">
           <div class="gig-title">Intimate Soundbath (Feature Set)</div>
           <div class="gig-desc">Creative, story-driven performances blending sound & film. Perfect for ticketed events and focused audiences.</div>
@@ -636,22 +736,25 @@ async def about_page():
       </div>
     </div>
 
-    <div class="section-title">Previous Works</div>
+    <div class="section-title">Previous Work</div>
     
     <div class="card" style="padding: 1.5rem; margin-bottom: 2rem;">
-      <p>Jeff tells the story of leaving Florida and leaving the church in the midst of an unstable relationship. When his breakup strands him in Wyoming, a new love comes along in the form of someone he literally meets in a dream. Jeff is then confronted by a startling truth - what he called love was in fact codependency and Christ is a metaphor for what happens when we let go.</p>
+      <p>In 2023 Jeff wrote and performed an original musical telling the story of leaving Florida and leaving the church in the midst of an unstable relationship. When his breakup strands him in Wyoming, a new love comes along in the form of someone he literally meets in a dream. Jeff is then confronted by a startling truth - what he called love was in fact codependency and Christ is a metaphor for what happens when we let go.</p>
       <iframe class="media-embed" style="margin-top: 1.5rem; border-radius: 8px; height: 350px;" src="https://www.youtube.com/embed/BxVXtz3iWnY?list=PLt863s_HgmtPtsJha60ndVTVoGp16B9fp" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-    <div class="card" style="padding: 1.5rem;">
-      <p>Shortly after this, Jeff is laid off from his career as an engineering consultant and leaves Wyoming in search of his new life as an artist. He travels 3 continents and 2,000 years of history in search of a story that will guide his artistic quest. Here is the soundtrack for that section of the story and you can watch the actual film below...</p>
+    <div class="card" style="padding: 1.5rem; margin-bottom: 2rem;">
+      <p>Shortly after this, Jeff is laid off from his career as an engineering consultant and leaves Wyoming in search of his new life as an artist. He travels 3 continents and 2,000 years of history in search of a story that will guide his artistic quest. Here is the feature-length film released in 2025</p>
       
-      <div class="soundcloud-embed" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+      <iframe class="media-embed" style="margin-top: 1.5rem; border-radius: 8px; height: 350px;" src="https://www.youtube.com/embed/wsYOyKvD6G8?start=1642" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="card" style="padding: 1.5rem;">
+      <p>In addition to live performance, Jeff showcases his recorded portfolio on Soundcloud & YouTube.</p>
+      
+      <div class="soundcloud-embed" style="margin-top: 1.5rem;">
         <iframe width="100%" height="350" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/jeff-streitmatter-iv/sets/psychedelic-adventure&color=%23ff66b2&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
       </div>
-
-      <p style="margin-top: 2rem; font-weight: 600; text-align: center;">And here's the feature-length film:</p>
-      <iframe class="media-embed" style="border-radius: 8px; height: 350px;" src="https://www.youtube.com/embed/wsYOyKvD6G8?start=1642" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
   </div>
@@ -661,7 +764,6 @@ async def about_page():
     return HTMLResponse(html)
 
 # ── PERFORMER & ADMIN UI ─────────────────────────────────────────────────────
-# Retaining your original performer and admin endpoints here for continuity.
 
 @app.get("/performer", response_class=HTMLResponse)
 async def performer_page(dep=Depends(require_performer)):
@@ -673,7 +775,6 @@ async def performer_page(dep=Depends(require_performer)):
   <title>Songmaster • Performer Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    /* Add performer styles here */
     body { background: #020617; color: white; font-family: sans-serif; }
   </style>
 </head>
