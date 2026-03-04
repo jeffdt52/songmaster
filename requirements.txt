@@ -6,3 +6,4 @@ pandas
 numpy
 requests
 openpyxl
+slowapi
