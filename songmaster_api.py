@@ -5,6 +5,7 @@ songmaster_api.py – FastAPI service for Songmaster + private tools
 
 Features:
 - Guest UI (Spotify Pink Parallax): query → suggestions → pick → name → thank-you
+- Live Page (/live): Narrative, Value Pillars, and SMS Opt-in.
 - About Page (/about): Digital business card and hireable offerings.
 - Admin UI (/admin): Global kill switch and AI gut check, protected by basic auth.
 - Performer UI (live-updating): shows request queue, auto-refreshes every 5s
@@ -165,6 +166,9 @@ class RequestRecord(BaseModel):
 class IngestRequest(BaseModel):
     song_data: str
 
+class SubscribeRequest(BaseModel):
+    phone: str = Field(..., min_length=7, max_length=20)
+
 
 # ── REQUEST QUEUE UTILS ─────────────────────────────────────────────────────
 
@@ -226,6 +230,18 @@ def require_performer(request: Request):
 
 
 # ── API ENDPOINTS – SONGMASTER SEARCH / REQUESTS ────────────────────────────
+
+@app.post("/api/subscribe")
+async def api_subscribe(req: SubscribeRequest):
+    if not DISCORD_WEBHOOK_URL:
+        return JSONResponse({"status": "error", "message": "Notification system offline"}, status_code=500)
+    
+    content = f"📱 **NEW SMS OPT-IN**\n**Phone:** `{req.phone}`\n*Add this to the Thursday morning Shortcut list.*"
+    try:
+        requests.post(DISCORD_WEBHOOK_URL, json={"content": content}, timeout=5)
+        return {"status": "ok"}
+    except Exception:
+        raise HTTPException(status_code=500, detail="Webhook failed")
 
 @app.post("/api/search", response_model=SearchResponse)
 @limiter.limit("10/15minutes")
@@ -462,6 +478,154 @@ async def admin_page(admin: str = Depends(verify_admin)):
 
 # ── PAGE ENDPOINTS (HTML) ───────────────────────────────────────────────────
 
+@app.get("/live", response_class=HTMLResponse)
+async def live_page():
+    html = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cherokee Radio • Live Music Variety Show</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg-card: rgba(24, 24, 24, 0.85);
+      --accent: #1ed760; /* Green */
+      --accent-soft: #ff66b2; /* Pink */
+      --text-main: #ffffff;
+      --text-muted: #a7a7a7;
+      --border-subtle: #333333;
+    }
+    body {
+      margin: 0;
+      padding: 1.5rem 1rem 3rem;
+      font-family: system-ui, sans-serif;
+      background-image: linear-gradient(to bottom, rgba(18,18,18,0.90) 0%, rgba(0,0,0,0.98) 100%), url('/static/background.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-blend-mode: multiply;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      font-size: 16px; 
+    }
+    .shell { width: 100%; max-width: 900px; }
+    
+    .nav-bar { display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-weight: 700; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px; transition: color 0.15s ease; }
+    .nav-link:hover, .nav-link.active { color: var(--accent-soft); }
+
+    .hero { text-align: center; margin-bottom: 3rem; }
+    .title { font-weight: 900; font-size: 3rem; color: var(--accent-soft); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.2rem; text-shadow: 0 0 15px rgba(255,102,178,0.4); }
+    .subtitle { font-size: 1.15rem; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 4px; }
+    
+    .card { background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-subtle); padding: 2.5rem; box-shadow: 0 20px 40px rgba(0,0,0,0.8); backdrop-filter: blur(4px); margin-bottom: 2rem; }
+    .card p { line-height: 1.6; color: var(--text-muted); font-size: 1.05rem; margin-top: 0; margin-bottom: 1.2rem; }
+    .card strong { color: var(--text-main); }
+
+    .pillar-list { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); }
+    .pillar { margin-bottom: 1.5rem; }
+    .pillar-title { color: var(--accent-soft); font-weight: 800; text-transform: uppercase; font-size: 1rem; letter-spacing: 1px; display: block; margin-bottom: 0.2rem; }
+    .pillar-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; display: block; }
+
+    .cta-container { text-align: center; margin-top: 2.5rem; }
+    .btn-primary { background: var(--accent-soft); color: #000; padding: 1rem 2.5rem; border-radius: 999px; border: none; font-size: 1rem; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: transform 0.2s ease; }
+    .btn-primary:hover { transform: scale(1.03); box-shadow: 0 0 25px rgba(255,102,178,0.3); }
+    .yt-link { display: block; margin-top: 1.5rem; color: var(--accent); font-weight: 700; text-decoration: none; font-size: 0.95rem; }
+
+    #modalOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 1000; justify-content: center; align-items: center; }
+    .modal-content { background: #111; border: 1px solid var(--border-subtle); padding: 2.5rem; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; }
+    input[type="tel"] { width: 100%; padding: 1rem; background: #000; border: 1px solid var(--border-subtle); border-radius: 8px; color: white; font-size: 1.1rem; margin: 1.5rem 0; text-align: center; }
+    .modal-btn { background: var(--accent); color: #000; width: 100%; padding: 1rem; border-radius: 8px; border: none; font-weight: 800; cursor: pointer; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    
+    <div class="nav-bar">
+      <a href="/" class="nav-link">Request Line</a>
+      <a href="/live" class="nav-link active">Live Show</a>
+      <a href="/about" class="nav-link">About</a>
+    </div>
+
+    <div class="hero">
+      <div class="title">8pm ET | EVERY THURSDAY</div>
+      <div class="subtitle">LIVE MUSIC VARIETY SHOW</div>
+    </div>
+
+    <div class="card">
+      <p><strong>Are you tired of feeling purposely isolated by the internet you consume?</strong> I’m tired of it, too. I’m tired of competing for your attention against loud, annoying creators and "bullshit" content designed for nothing but mind-numbing engagement.</p>
+      
+      <p>As a full-time artist, I made the decision to delete my social media presence entirely. It was a radical move, but I couldn't keep participating in a system where the algorithm feeds us depressing news and low-brow slop while we all suffer in isolation.</p>
+      
+      <p>I am coming back online on my own terms. As a full-time restaurant musician, I’ve spent years perfecting a unique game—parodying familiar tunes and soundtracking the room in real-time. I’ve digitized that experience into <strong>jeffy.app</strong> and I’m bringing it to your doorstep.</p>
+      
+      <p><strong>I'm going to level with you: I’m putting a lot into this.</strong> Each Thursday at 8pm ET, tune in for 90 minutes broadcasted LIVE from 9,000 ft:</p>
+
+      <div class="pillar-list">
+        <div class="pillar">
+          <span class="pillar-title">A Free Musical Massage</span>
+          <span class="pillar-desc">I’m blending my experience as a meditation facilitator with the ability to make the piano speak. These are state-of-the-art soundscapes designed to put you into a restorative, trancelike state.</span>
+        </div>
+        <div class="pillar">
+          <span class="pillar-title">A Free Music Lesson</span>
+          <span class="pillar-desc">Based on my time as an engineer at Lockheed Martin, I take high-level concepts and make them simple. Every week I reveal trade secrets of mastering the piano and your vocal ability.</span>
+        </div>
+        <div class="pillar">
+          <span class="pillar-title">Request a Song</span>
+          <span class="pillar-desc">Experience the electric performance I deliver at venues across the country. Browse my repertoire with my custom jeffy.app and request a song to join the live soundtrack.</span>
+        </div>
+      </div>
+
+      <div class="cta-container">
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Join the notification network. Receive a handwritten text every Thursday morning.</p>
+        <button class="btn-primary" onclick="openModal()">[ Opt-In For Reminders ]</button>
+        <a href="https://www.youtube.com/@pursuingperspective/live" target="_blank" class="yt-link">Watch Live: youtube.com/@pursuingperspective/live</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalOverlay">
+    <div class="modal-content">
+      <h2 style="color: var(--accent-soft); margin-top: 0; font-size: 1.5rem;">JOIN THE CIRCLE</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">Thursday morning handwritten reminders. No bots.</p>
+      <input type="tel" id="phoneInput" placeholder="(555) 555-5555">
+      <button class="modal-btn" onclick="submitPhone()">Remind Me</button>
+      <p style="font-size: 0.8rem; margin-top: 1.5rem; cursor: pointer; color: var(--text-muted);" onclick="closeModal()">Maybe later</p>
+    </div>
+  </div>
+
+  <script>
+    function openModal() { document.getElementById('modalOverlay').style.display = 'flex'; }
+    function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+    
+    async function submitPhone() {
+      const phone = document.getElementById('phoneInput').value;
+      if(!phone) return;
+      const btn = document.querySelector('.modal-btn');
+      btn.innerText = "SENDING...";
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: phone })
+        });
+        if (res.ok) {
+          document.querySelector('.modal-content').innerHTML = "<h2 style='color: var(--accent);'>YOU'RE IN.</h2><p>See you Thursday.</p><p style='cursor:pointer' onclick='closeModal()'>Close</p>";
+        }
+      } catch (err) {
+        btn.innerText = "TRY AGAIN";
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
+"""
+    return HTMLResponse(html)
+
 @app.get("/", response_class=HTMLResponse)
 async def guest_page():
     html = """
@@ -541,8 +705,8 @@ async def guest_page():
   
     <div class="nav-bar">
       <a href="/" class="nav-link active">Request Line</a>
+      <a href="/live" class="nav-link">Live Show</a>
       <a href="/about" class="nav-link">About</a>
-      <a href="https://linqapp.com/cherokeerhodes" target="_blank" class="nav-link">Contact</a>
     </div>
 
     <div class="header">
@@ -744,8 +908,8 @@ async def about_page():
     
     <div class="nav-bar">
       <a href="/" class="nav-link">Request Line</a>
+      <a href="/live" class="nav-link">Live Show</a>
       <a href="/about" class="nav-link active">About</a>
-      <a href="https://linqapp.com/cherokeerhodes" target="_blank" class="nav-link">Contact</a>
     </div>
 
     <div class="hero">
