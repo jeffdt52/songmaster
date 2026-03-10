@@ -544,9 +544,10 @@ async def live_page():
   <div class="shell">
     
     <div class="nav-bar">
-      <a href="/" class="nav-link">Request Line</a>
-      <a href="/live" class="nav-link active">Live Show</a>
+      <a href="/" class="nav-link">Request</a>
+      <a href="/live" class="nav-link active">Live</a>
       <a href="/about" class="nav-link">About</a>
+      <a href="https://linqapp.com/cherokeerhodes" target="_blank" class="nav-link">Contact</a>
     </div>
 
     <div class="hero">
@@ -565,11 +566,11 @@ async def live_page():
 
       <div class="pillar-list">
         <div class="pillar">
-          <span class="pillar-title">A Free Musical Massage</span>
+          <span class="pillar-title">Free Sensory Massage</span>
           <span class="pillar-desc">I’m blending my experience as a meditation facilitator with the ability to make the piano speak. These are state-of-the-art soundscapes designed to put you into a restorative, trancelike state.</span>
         </div>
         <div class="pillar">
-          <span class="pillar-title">A Free Music Lesson</span>
+          <span class="pillar-title">Free Music Lesson</span>
           <span class="pillar-desc">Based on my time as an engineer at Lockheed Martin, I take high-level concepts and make them simple. Every week I reveal trade secrets of mastering the piano and your vocal ability.</span>
         </div>
         <div class="pillar">
@@ -580,7 +581,7 @@ async def live_page():
 
       <div class="cta-container">
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">Join the notification network. Receive a handwritten text every Thursday morning.</p>
-        <button class="btn-primary" onclick="openModal()">[ Opt-In For Reminders ]</button>
+        <button class="btn-primary" onclick="openModal()">Opt-In For Reminders</button>
         <a href="https://www.youtube.com/@pursuingperspective/live" target="_blank" class="yt-link">Watch Live: youtube.com/@pursuingperspective/live</a>
       </div>
     </div>
@@ -704,9 +705,10 @@ async def guest_page():
   <div class="shell">
   
     <div class="nav-bar">
-      <a href="/" class="nav-link active">Request Line</a>
-      <a href="/live" class="nav-link">Live Show</a>
+      <a href="/" class="nav-link active">Request</a>
+      <a href="/live" class="nav-link">Live</a>
       <a href="/about" class="nav-link">About</a>
+      <a href="https://linqapp.com/cherokeerhodes" target="_blank" class="nav-link">Contact</a>
     </div>
 
     <div class="header">
@@ -907,9 +909,10 @@ async def about_page():
   <div class="shell">
     
     <div class="nav-bar">
-      <a href="/" class="nav-link">Request Line</a>
-      <a href="/live" class="nav-link">Live Show</a>
+      <a href="/" class="nav-link">Request</a>
+      <a href="/live" class="nav-link">Live</a>
       <a href="/about" class="nav-link active">About</a>
+      <a href="https://linqapp.com/cherokeerhodes" target="_blank" class="nav-link">Contact</a>
     </div>
 
     <div class="hero">
