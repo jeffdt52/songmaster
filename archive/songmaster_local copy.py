@@ -8,37 +8,36 @@ CLI Songmaster agent on top of your "Songbook Data.xlsx".
 Two modes:
 
 1) Enrichment / DB build (run occasionally):
-    python agent_songmaster.py build-db
+   python agent_songmaster.py build-db
 
-    - Loads songs from Excel.
-    - For each song, calls GPT to infer mood/era/themes/etc., plus structured fields:
-        * time_signature, is_waltz
-        * release_decade, style_tags
-        * familiarity_teens, familiarity_seniors
-        * tech_difficulty_solo_piano
-        * is_movie_or_musical_song
-    - Creates a compact lyrics summary (no direct quotes).
-    - Saves to songbook_enriched.json
-    - Builds embeddings from rich text (title/artist/category + lyrics + summary + tags)
-      and caches them.
+   - Loads songs from Excel.
+   - For each song, calls GPT to infer mood/era/themes/etc., plus structured fields:
+       * time_signature, is_waltz
+       * release_decade, style_tags
+       * familiarity_teens, familiarity_seniors
+       * tech_difficulty_solo_piano
+       * is_movie_or_musical_song
+   - Creates a compact lyrics summary (no direct quotes).
+   - Saves to songbook_enriched.json
+   - Builds embeddings from rich text (title/artist/category + lyrics + summary + tags)
+     and caches them.
 
 2) Interactive CLI (run frequently):
-    python agent_songmaster.py
+   python agent_songmaster.py
 
-    - Loads songs from Excel.
-    - Loads enriched DB and embeddings if present.
-    - For each query:
-        * Uses embeddings to grab a candidate pool.
-        * Calls GPT to re-rank/filter candidates intelligently based on your query
-          (audience, decade, style, difficulty, etc.).
-        * Displays results grouped by KEY then CATEGORY.
-        * POPULAR songs (Songbook containing 'Popular') are bolded.
-        * Movie & video Games are colored PINK (bright magenta).
-        * Alternative / Weird is left uncolored (white).
+   - Loads songs from Excel.
+   - Loads enriched DB and embeddings if present.
+   - For each query:
+       * Uses embeddings to grab a candidate pool.
+       * Calls GPT to re-rank/filter candidates intelligently based on your query
+         (audience, decade, style, difficulty, etc.).
+       * Displays results grouped by KEY then CATEGORY.
+       * POPULAR songs (Songbook containing 'Popular') are bolded.
+       * Movie & video Games are colored PINK (bright magenta).
+       * Alternative / Weird is left uncolored (white).
 
 Commands:
     query <text>
-    chaos mode
     group <idx...> <group_name>
     groups
     show
@@ -54,7 +53,6 @@ import os
 import sys
 import json
 import textwrap
-import random
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Dict, Tuple, Any
@@ -91,7 +89,7 @@ FG_PINK = FG_BRIGHT_MAGENTA  # alias for clarity
 
 # Category color mapping
 # NOTE: Alternative / Weird intentionally left as RESET (no color)
-#        Movie & video Games gets PINK
+#       Movie & video Games gets PINK
 CATEGORY_COLORS = {
     "Alternative / Weird": RESET,         # no color
     "Classic Rock & Pop hits": FG_CYAN,   # POPULAR = will be bolded separately
@@ -638,8 +636,8 @@ def search_songs(
 
 def print_header():
     print("───────────────────────────────────────────────")
-    print(f"{BOLD}                SONGMASTER{RESET}")
-    print(f"{DIM}    Lyrics-aware Semantic Songbook Brain{RESET}")
+    print(f"{BOLD}              SONGMASTER{RESET}")
+    print(f"{DIM}   Lyrics-aware Semantic Songbook Brain{RESET}")
     print("───────────────────────────────────────────────")
     print("Type 'help' to see available commands.")
     print("Type 'exit' or 'quit' to leave Songmaster.")
@@ -657,9 +655,6 @@ def print_help():
       Example: query waltzes
       Example: query 80s music also in movies
       Example: query songs which are technically difficult for a single piano player
-
-  {BOLD}chaos mode{RESET}
-      Random selection of 17 songs (grouped by Key).
 
   {BOLD}group <idx...> <group_name>{RESET}
       Create/extend a group with songs from the last query results.
@@ -694,20 +689,6 @@ def print_help():
     - Create a compact lyrics summary (no direct quotes).
     - Save songbook_enriched.json
     - Build enriched embeddings using lyrics + summary + context.
-
-It compares your Excel file to your existing JSON "database."
-
-If it finds a song in the Excel file that isn't in the JSON (a new entry), it calls GPT to "enrich" it (inferring the decade, mood, complexity, etc.).
-
-If the song is already in the JSON, it skips the GPT call to save you money and time.
-
-2. Where is the "Database"?
-In this local version of the script, there isn't a traditional SQL database. Instead, the "database" consists of two local files that live in the same folder as your script:
-
-songbook_enriched.json: This is the "brain." It stores all the text-based data GPT generated (themes, summaries, difficulty ratings).
-
-songbook_embeddings.npy: This is the "map." It’s a mathematical representation of your songs that allows the query command to find matches based on meaning rather than just keywords.
-
 """
     print(textwrap.dedent(msg).strip())
     print()
@@ -860,7 +841,7 @@ Song metadata from my personal songbook:
 - Artist: {song.artist or "Unknown"}
 - Key: {song.key or "Unknown"}
 - Category: {song.category or "Unknown"}   (e.g. Alternative / Weird, Classic Rock & Pop hits, Movie & video Games)
-- Group: {song.group or "None"}            (sometimes a show like "Mary Poppins" or "Phantom")
+- Group: {song.group or "None"}           (sometimes a show like "Mary Poppins" or "Phantom")
 - Notes: {song.notes or "None"}
 
 Constraints:
@@ -1056,16 +1037,6 @@ def main():
 
         if cmd == "help":
             print_help()
-            continue
-
-        if cmd == "chaos mode":
-            # Select 17 unique random song indices
-            num_to_sample = min(17, len(songs))
-            random_indices = random.sample(range(len(songs)), num_to_sample)
-            # Create dummy score of 1.0 for each
-            results_raw = [(idx, 1.0) for idx in random_indices]
-            last_results = sort_results_for_display(songs, results_raw)
-            print_query_results(songs, last_results)
             continue
 
         if cmd.startswith("query "):

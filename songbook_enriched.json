@@ -16129,5 +16129,1540 @@
       "recommended_set_context": "Ideal for a lighthearted, intellectually curious segment of a show.",
       "comment_for_performer": "Maintain clear diction and a playful delivery to capture the song's quirky charm and informative nature."
     }
+  },
+  "347": {
+    "_version": 2,
+    "title": "BANANAS AND BLOW",
+    "artist": "Ween",
+    "data": {
+      "mood_words": [
+        "quirky",
+        "playful",
+        "edgy"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 110,
+      "primary_era": "1990s",
+      "release_decade": "1990s",
+      "lyrical_themes": [
+        "absurdity",
+        "humor",
+        "counterculture",
+        "surreal imagery"
+      ],
+      "vibe_tags": [
+        "offbeat",
+        "alternative",
+        "irreverent"
+      ],
+      "style_tags": [
+        "alternative rock",
+        "experimental"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from playful irreverence to quirky intensity",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 1,
+      "lyrics_summary": "The lyrics present a bizarre and humorous narrative filled with surreal and provocative images, reflecting a playful yet edgy countercultural attitude.",
+      "recommended_set_context": "Use as an energetic, quirky centerpiece to engage alternative music fans.",
+      "comment_for_performer": "Emphasize the song’s oddball character with playful dynamics and a loose, expressive touch."
+    }
+  },
+  "348": {
+    "_version": 2,
+    "title": "SOUR CANDY",
+    "artist": "Melt",
+    "data": {
+      "mood_words": [
+        "edgy",
+        "playful",
+        "bittersweet"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 110,
+      "primary_era": "2010s",
+      "release_decade": "2010s",
+      "lyrical_themes": [
+        "temptation",
+        "duality",
+        "desire",
+        "danger"
+      ],
+      "vibe_tags": [
+        "dark pop",
+        "sultry",
+        "electronic"
+      ],
+      "style_tags": [
+        "alternative pop",
+        "electropop",
+        "showtune"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from teasing allure to intense craving",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": true,
+      "familiarity_teens": 6,
+      "familiarity_seniors": 2,
+      "lyrics_summary": "The lyrics explore a provocative relationship where sweetness masks a sharp edge, describing a push-pull dynamic of attraction and risk. The imagery evokes tasting something both tempting and harmful, reflecting complex emotions of desire and caution.",
+      "recommended_set_context": "Use as a dramatic, sultry highlight in a theatrical or alternative pop set.",
+      "comment_for_performer": "Emphasize the contrast between softness and bite in your dynamics to capture the song’s dual nature."
+    }
+  },
+  "349": {
+    "_version": 2,
+    "title": "COME TOGETHER",
+    "artist": "The Beatles",
+    "data": {
+      "mood_words": [
+        "groovy",
+        "mysterious",
+        "laid-back",
+        "cool"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 80,
+      "primary_era": "1960s",
+      "release_decade": "1960s",
+      "lyrical_themes": [
+        "unity",
+        "individuality",
+        "quirky characters",
+        "invitation"
+      ],
+      "vibe_tags": [
+        "psychedelic",
+        "bluesy",
+        "funky",
+        "beatlesque"
+      ],
+      "style_tags": [
+        "classic rock",
+        "psychedelic rock"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from intrigue to cool confidence",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 6,
+      "familiarity_seniors": 9,
+      "lyrics_summary": "The lyrics paint a picture of a charismatic figure inviting others to unite in a playful, enigmatic way, describing various colorful characters and their unique traits.",
+      "recommended_set_context": "Great for mid-set to engage the audience with its groove and mystique.",
+      "comment_for_performer": "Focus on maintaining the groove and subtle rhythmic nuances to capture the song’s cool, hypnotic feel."
+    }
+  },
+  "350": {
+    "_version": 2,
+    "title": "WEST LA FADEAWAY",
+    "artist": "Grateful Dead",
+    "data": {
+      "mood_words": [
+        "dreamy",
+        "nostalgic",
+        "melancholic"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 100,
+      "primary_era": "1970s",
+      "release_decade": "1970s",
+      "lyrical_themes": [
+        "urban life",
+        "reflection",
+        "change",
+        "memory"
+      ],
+      "vibe_tags": [
+        "psychedelic",
+        "laid-back",
+        "introspective"
+      ],
+      "style_tags": [
+        "folk rock",
+        "psychedelic rock",
+        "jam band"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": false,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from wistful longing to peaceful acceptance",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 2,
+      "familiarity_seniors": 6,
+      "lyrics_summary": "The lyrics paint a picture of a fading neighborhood in West Los Angeles, evoking feelings of nostalgia and change as the singer reflects on past times and the passage of life.",
+      "recommended_set_context": "play during a mellow, reflective segment",
+      "comment_for_performer": "focus on smooth phrasing and subtle dynamics to capture the song’s dreamy atmosphere"
+    }
+  },
+  "351": {
+    "_version": 2,
+    "title": "MARY JANES LAST DANCE",
+    "artist": "Tomy Petter and the Heartbreakers",
+    "data": {
+      "mood_words": [
+        "nostalgic",
+        "laid-back",
+        "melancholic",
+        "reflective"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 100,
+      "primary_era": "1990s",
+      "release_decade": "1990s",
+      "lyrical_themes": [
+        "love",
+        "loss",
+        "memory",
+        "farewell"
+      ],
+      "vibe_tags": [
+        "classic rock",
+        "storytelling",
+        "bittersweet"
+      ],
+      "style_tags": [
+        "90s rock",
+        "classic rock",
+        "folk rock"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "wistful reminiscence to gentle acceptance",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 4,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics tell the story of a woman named Mary Jane whose last dance symbolizes a poignant goodbye. The narrator reflects on past moments with her, mixing feelings of longing and acceptance as he recounts their final encounter.",
+      "recommended_set_context": "Play during a reflective or mellow segment of the set.",
+      "comment_for_performer": "Focus on conveying the nostalgic and bittersweet mood with dynamic phrasing and subtle tempo shifts."
+    }
+  },
+  "352": {
+    "_version": 2,
+    "title": "BREATHE",
+    "artist": "Pink Floyd",
+    "data": {
+      "mood_words": [
+        "dreamy",
+        "reflective",
+        "calm"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 60,
+      "primary_era": "1970s",
+      "release_decade": "1970s",
+      "lyrical_themes": [
+        "existential reflection",
+        "life's fragility",
+        "time passing",
+        "inner peace"
+      ],
+      "vibe_tags": [
+        "psychedelic",
+        "ambient",
+        "spacey",
+        "meditative"
+      ],
+      "style_tags": [
+        "progressive rock",
+        "psychedelic rock"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from contemplative calm to subtle melancholy",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics explore the delicate nature of life and the importance of taking a moment to breathe and appreciate existence. They evoke imagery of floating through time and space, reflecting on the fleeting moments and the quiet beauty in everyday experiences.",
+      "recommended_set_context": "Ideal for a reflective, slow segment to create a tranquil atmosphere.",
+      "comment_for_performer": "Focus on maintaining a smooth, flowing touch to capture the song's ethereal quality; subtle dynamic shifts enhance emotional depth."
+    }
+  },
+  "353": {
+    "_version": 2,
+    "title": "SEX AND CANDY",
+    "artist": "Marcy Playground",
+    "data": {
+      "mood_words": [
+        "moody",
+        "laid-back",
+        "sensual",
+        "dreamy"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 90,
+      "primary_era": "1990s",
+      "release_decade": "1990s",
+      "lyrical_themes": [
+        "desire",
+        "youthful confusion",
+        "sensuality",
+        "introspection"
+      ],
+      "vibe_tags": [
+        "alternative",
+        "grunge",
+        "90s rock",
+        "chill"
+      ],
+      "style_tags": [
+        "alternative rock",
+        "90s rock"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from dreamy longing to playful sensuality",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 6,
+      "familiarity_seniors": 4,
+      "lyrics_summary": "The lyrics explore a hazy, intimate encounter filled with youthful desire and ambiguous emotions, blending sensual imagery with a sense of playful confusion and longing.",
+      "recommended_set_context": "Great for a moody mid-set vibe with a nostalgic 90s touch.",
+      "comment_for_performer": "Focus on capturing the laid-back groove and sultry mood; subtle dynamics enhance the dreamy atmosphere."
+    }
+  },
+  "354": {
+    "_version": 2,
+    "title": "CANT YOU SEE",
+    "artist": "The Marshall Tucker Band",
+    "data": {
+      "mood_words": [
+        "reflective",
+        "yearning",
+        "nostalgic"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 90,
+      "primary_era": "1970s",
+      "release_decade": "1970s",
+      "lyrical_themes": [
+        "love",
+        "longing",
+        "heartache",
+        "communication"
+      ],
+      "vibe_tags": [
+        "southern rock",
+        "country rock",
+        "bluesy"
+      ],
+      "style_tags": [
+        "southern rock",
+        "country rock"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": false,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from longing and confusion to hopeful understanding",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 2,
+      "familiarity_seniors": 6,
+      "lyrics_summary": "The lyrics express a deep yearning for connection and clarity in a troubled relationship, pleading for the other person to recognize the emotional pain and desire for understanding.",
+      "recommended_set_context": "play during a mellow, introspective segment",
+      "comment_for_performer": "Focus on conveying the emotional nuance through dynamic phrasing and subtle tempo shifts."
+    }
+  },
+  "355": {
+    "_version": 2,
+    "title": "END OF THE LINE",
+    "artist": "Traveling Wilburys",
+    "data": {
+      "mood_words": [
+        "reflective",
+        "nostalgic",
+        "hopeful"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 100,
+      "primary_era": "1980s",
+      "release_decade": "1980s",
+      "lyrical_themes": [
+        "journey",
+        "perseverance",
+        "friendship",
+        "life's challenges"
+      ],
+      "vibe_tags": [
+        "classic rock",
+        "road trip",
+        "laid-back",
+        "storytelling"
+      ],
+      "style_tags": [
+        "classic rock",
+        "folk rock"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from struggle to hopeful resolution",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics describe a journey where despite hardships and setbacks, the narrator encourages moving forward with resilience and camaraderie, emphasizing that the end of one path is just the start of another.",
+      "recommended_set_context": "Great for mid-set reflective moments or closing with optimism.",
+      "comment_for_performer": "Focus on steady rhythm and clear storytelling to capture the song's hopeful yet grounded spirit."
+    }
+  },
+  "356": {
+    "_version": 2,
+    "title": "SUGAREE",
+    "artist": "Grateful Dead",
+    "data": {
+      "mood_words": [
+        "laid-back",
+        "nostalgic",
+        "wistful"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 100,
+      "primary_era": "1970s",
+      "release_decade": "1970s",
+      "lyrical_themes": [
+        "love",
+        "regret",
+        "longing",
+        "freedom"
+      ],
+      "vibe_tags": [
+        "jam band",
+        "psychedelic",
+        "bluesy",
+        "rootsy"
+      ],
+      "style_tags": [
+        "folk rock",
+        "blues rock",
+        "jam band"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from yearning to resigned acceptance",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics tell a story of a person reflecting on a complicated romantic relationship, expressing feelings of loss and the desire for freedom while acknowledging the pain involved.",
+      "recommended_set_context": "Great for mid-set to create a reflective mood with room for instrumental improvisation.",
+      "comment_for_performer": "Focus on a relaxed groove and let the melody breathe; subtle dynamic shifts highlight the song’s emotional depth."
+    }
+  },
+  "357": {
+    "_version": 2,
+    "title": "LET HER GO",
+    "artist": "Passenger",
+    "data": {
+      "mood_words": [
+        "melancholic",
+        "reflective",
+        "wistful"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 75,
+      "primary_era": "2010s",
+      "release_decade": "2010s",
+      "lyrical_themes": [
+        "loss",
+        "regret",
+        "love",
+        "realization"
+      ],
+      "vibe_tags": [
+        "introspective",
+        "acoustic",
+        "emotional"
+      ],
+      "style_tags": [
+        "folk",
+        "acoustic",
+        "singer-songwriter"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from regretful realization to gentle acceptance",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 7,
+      "familiarity_seniors": 5,
+      "lyrics_summary": "The lyrics explore the pain of recognizing the value of someone only after they are gone, reflecting on missed opportunities and the bittersweet nature of love and loss.",
+      "recommended_set_context": "Ideal for a reflective, intimate moment in a set.",
+      "comment_for_performer": "Focus on conveying the emotional nuance with delicate dynamics and phrasing to capture the song’s wistful tone."
+    }
+  },
+  "358": {
+    "_version": 2,
+    "title": "THE MIDDLE",
+    "artist": "Jimmy Eats World",
+    "data": {
+      "mood_words": [
+        "encouraging",
+        "optimistic",
+        "uplifting"
+      ],
+      "energy": "high",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 160,
+      "primary_era": "2000s",
+      "release_decade": "2000s",
+      "lyrical_themes": [
+        "self-acceptance",
+        "patience",
+        "personal growth",
+        "overcoming insecurity"
+      ],
+      "vibe_tags": [
+        "anthemic",
+        "alternative rock",
+        "youthful"
+      ],
+      "style_tags": [
+        "alternative rock",
+        "emo",
+        "pop punk"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from doubt to confidence",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 8,
+      "familiarity_seniors": 4,
+      "lyrics_summary": "The song offers reassurance to someone feeling out of place, encouraging patience and self-belief. It emphasizes that things will improve over time and that staying true to oneself is important despite external pressures.",
+      "recommended_set_context": "Great for energizing the audience mid-set with an uplifting message.",
+      "comment_for_performer": "Focus on dynamic shifts to highlight the hopeful message; keep the rhythm driving but not rushed."
+    }
+  },
+  "359": {
+    "_version": 2,
+    "title": "EVERYBODY HURTS",
+    "artist": "R.E.M.",
+    "data": {
+      "mood_words": [
+        "comforting",
+        "melancholy",
+        "hopeful",
+        "reassuring"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 75,
+      "primary_era": "1990s",
+      "release_decade": "1990s",
+      "lyrical_themes": [
+        "emotional pain",
+        "perseverance",
+        "support",
+        "hope"
+      ],
+      "vibe_tags": [
+        "introspective",
+        "uplifting",
+        "anthemic",
+        "soft rock"
+      ],
+      "style_tags": [
+        "alternative rock",
+        "soft rock",
+        "90s rock"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from despair to gentle encouragement",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 6,
+      "familiarity_seniors": 8,
+      "lyrics_summary": "The lyrics offer solace to those feeling overwhelmed by pain, reminding listeners that suffering is universal and encouraging them to hold on through tough times. It conveys empathy and reassurance that they are not alone in their struggles.",
+      "recommended_set_context": "Play during reflective or emotional moments to connect deeply with the audience.",
+      "comment_for_performer": "Focus on conveying warmth and sincerity; keep the dynamics gentle and expressive to emphasize the song’s comforting message."
+    }
+  },
+  "360": {
+    "_version": 2,
+    "title": "LOVIN YOU",
+    "artist": "Minnie Riperton",
+    "data": {
+      "mood_words": [
+        "romantic",
+        "tender",
+        "dreamy",
+        "intimate"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 70,
+      "primary_era": "1970s",
+      "release_decade": "1970s",
+      "lyrical_themes": [
+        "love",
+        "devotion",
+        "intimacy",
+        "gratitude"
+      ],
+      "vibe_tags": [
+        "soulful",
+        "smooth",
+        "sensual",
+        "soft"
+      ],
+      "style_tags": [
+        "soul",
+        "R&B",
+        "ballad",
+        "quiet storm"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from gentle admiration to deep heartfelt love",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 8,
+      "lyrics_summary": "The lyrics express a profound and tender love, describing the joy and peace found in being with someone special. It conveys gratitude for the beloved's presence and the overwhelming feeling of loving deeply and purely.",
+      "recommended_set_context": "Perfect for a romantic, intimate moment in a set.",
+      "comment_for_performer": "Focus on smooth, controlled dynamics and phrasing to capture the song’s tender emotion."
+    }
+  },
+  "361": {
+    "_version": 2,
+    "title": "LOCKET",
+    "artist": "Crumb",
+    "data": {
+      "mood_words": [
+        "dreamy",
+        "introspective",
+        "ethereal"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 60,
+      "primary_era": "2010s",
+      "release_decade": "2010s",
+      "lyrical_themes": [
+        "memory",
+        "nostalgia",
+        "intimacy",
+        "loss"
+      ],
+      "vibe_tags": [
+        "ambient",
+        "psychedelic",
+        "indie"
+      ],
+      "style_tags": [
+        "indie rock",
+        "psychedelic pop",
+        "alternative"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": false,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "reflective and wistful throughout",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 4,
+      "familiarity_seniors": 1,
+      "lyrics_summary": "The lyrics evoke a sense of holding onto a cherished memory symbolized by a locket, blending feelings of longing and tender reflection on past intimacy and emotional connection.",
+      "recommended_set_context": "play during a mellow, introspective segment",
+      "comment_for_performer": "focus on creating a gentle, flowing atmosphere with delicate dynamics to capture the song’s dreamy mood."
+    }
+  },
+  "362": {
+    "_version": 2,
+    "title": "BUTTERFLY",
+    "artist": "Jon Batiste",
+    "data": {
+      "mood_words": [
+        "gentle",
+        "reflective",
+        "hopeful"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 90,
+      "primary_era": "2020s",
+      "release_decade": "2020s",
+      "lyrical_themes": [
+        "transformation",
+        "freedom",
+        "growth",
+        "self-discovery"
+      ],
+      "vibe_tags": [
+        "soulful",
+        "intimate",
+        "uplifting"
+      ],
+      "style_tags": [
+        "modern jazz",
+        "soul",
+        "contemporary"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from introspection to hopeful liberation",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 4,
+      "familiarity_seniors": 3,
+      "lyrics_summary": "The lyrics describe a journey of personal transformation and growth, using the metaphor of a butterfly emerging from its cocoon to express themes of freedom and self-discovery.",
+      "recommended_set_context": "Ideal for a soulful, reflective moment in a set.",
+      "comment_for_performer": "Focus on expressive dynamics and phrasing to convey the song's hopeful and intimate mood."
+    }
+  },
+  "363": {
+    "_version": 2,
+    "title": "ALWAYS ON MY MIND",
+    "artist": "Willie Nelson",
+    "data": {
+      "mood_words": [
+        "nostalgic",
+        "regretful",
+        "tender",
+        "reflective"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 70,
+      "primary_era": "1970s",
+      "release_decade": "1970s",
+      "lyrical_themes": [
+        "love",
+        "regret",
+        "apology",
+        "remembrance"
+      ],
+      "vibe_tags": [
+        "intimate",
+        "melancholic",
+        "country",
+        "ballad"
+      ],
+      "style_tags": [
+        "country",
+        "ballad",
+        "folk"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from regret to heartfelt longing",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 8,
+      "lyrics_summary": "The lyrics express deep remorse for past mistakes in a romantic relationship, emphasizing that despite shortcomings, the loved one was always in the singer's thoughts and heart.",
+      "recommended_set_context": "Ideal for a reflective, emotional moment in the set.",
+      "comment_for_performer": "Focus on conveying vulnerability and warmth; use gentle dynamics to enhance intimacy."
+    }
+  },
+  "364": {
+    "_version": 2,
+    "title": "DON’T THINK TWICE IT'S ALRIGHT",
+    "artist": "Bob Dylan",
+    "data": {
+      "mood_words": [
+        "reflective",
+        "wistful",
+        "resigned"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 90,
+      "primary_era": "1960s",
+      "release_decade": "1960s",
+      "lyrical_themes": [
+        "heartbreak",
+        "moving on",
+        "acceptance",
+        "farewell"
+      ],
+      "vibe_tags": [
+        "introspective",
+        "acoustic",
+        "storytelling"
+      ],
+      "style_tags": [
+        "folk",
+        "classic folk"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from sorrowful acceptance to calm resolve",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics tell the story of someone coming to terms with a relationship ending, expressing a mix of sadness and acceptance while encouraging the other person to move forward without regret. There's a sense of finality and personal strength beneath the gentle farewell.",
+      "recommended_set_context": "Ideal for introspective moments or closing a set with emotional depth.",
+      "comment_for_performer": "Focus on conveying subtle emotional shifts with phrasing and dynamics; keep the tempo steady to preserve the song's contemplative mood."
+    }
+  },
+  "365": {
+    "_version": 2,
+    "title": "KAULANA KAWAIHAE",
+    "artist": "Israel Kamakawiwoʻole",
+    "data": {
+      "mood_words": [
+        "nostalgic",
+        "peaceful",
+        "reflective"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 65,
+      "primary_era": "1990s",
+      "release_decade": "1990s",
+      "lyrical_themes": [
+        "home",
+        "nature",
+        "belonging",
+        "memory"
+      ],
+      "vibe_tags": [
+        "island",
+        "laid-back",
+        "intimate",
+        "acoustic"
+      ],
+      "style_tags": [
+        "hawaiian",
+        "folk",
+        "ukulele ballad"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": false,
+      "difficulty": "easy",
+      "tech_difficulty_solo_piano": 2,
+      "emotional_arc": "gentle longing to serene acceptance",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 6,
+      "lyrics_summary": "The lyrics evoke a deep connection to the land and sea of Kawaihae, expressing a heartfelt longing for home and the peaceful beauty of nature. They reflect memories and a serene appreciation of place and heritage.",
+      "recommended_set_context": "Ideal for a calm, reflective moment or closing a set gently.",
+      "comment_for_performer": "Focus on soft dynamics and a relaxed tempo to capture the song’s intimate, soothing mood."
+    }
+  },
+  "366": {
+    "_version": 2,
+    "title": "PERFECT",
+    "artist": "Ed Sheeran",
+    "data": {
+      "mood_words": [
+        "romantic",
+        "tender",
+        "intimate",
+        "nostalgic"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 60,
+      "primary_era": "2010s",
+      "release_decade": "2010s",
+      "lyrical_themes": [
+        "love",
+        "romance",
+        "commitment",
+        "memory",
+        "celebration"
+      ],
+      "vibe_tags": [
+        "heartfelt",
+        "acoustic",
+        "sentimental",
+        "soft"
+      ],
+      "style_tags": [
+        "pop",
+        "acoustic",
+        "ballad",
+        "singer-songwriter"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "gentle build from sweet nostalgia to heartfelt devotion",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 9,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics describe a deep romantic connection, reflecting on perfect moments shared between two people and envisioning a future together filled with love and happiness.",
+      "recommended_set_context": "Ideal for intimate moments or romantic settings in a set.",
+      "comment_for_performer": "Focus on expressive dynamics and gentle phrasing to convey warmth and sincerity."
+    }
+  },
+  "367": {
+    "_version": 2,
+    "title": "EVEYRTHING HAS CHANGED",
+    "artist": "Taylor Swift",
+    "data": {
+      "mood_words": [
+        "reflective",
+        "hopeful",
+        "intimate"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 90,
+      "primary_era": "2010s",
+      "release_decade": "2010s",
+      "lyrical_themes": [
+        "love",
+        "change",
+        "new beginnings",
+        "emotional growth"
+      ],
+      "vibe_tags": [
+        "romantic",
+        "contemplative",
+        "soft"
+      ],
+      "style_tags": [
+        "pop",
+        "acoustic",
+        "ballad"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from uncertainty to hopeful transformation",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 7,
+      "familiarity_seniors": 4,
+      "lyrics_summary": "The lyrics explore the profound feeling of life shifting after meeting someone special, capturing the emotional impact of new love and the way it changes perspective and priorities.",
+      "recommended_set_context": "ideal for intimate moments or reflective interludes",
+      "comment_for_performer": "Focus on conveying warmth and subtle emotional shifts; dynamics should be gentle but expressive."
+    }
+  },
+  "368": {
+    "_version": 2,
+    "title": "TOXIC",
+    "artist": "Brittney Spears",
+    "data": {
+      "mood_words": [
+        "seductive",
+        "intense",
+        "dangerous",
+        "addictive"
+      ],
+      "energy": "high",
+      "tempo_label": "fast",
+      "tempo_bpm_guess": 140,
+      "primary_era": "2000s",
+      "release_decade": "2000s",
+      "lyrical_themes": [
+        "toxic love",
+        "addiction",
+        "dangerous attraction",
+        "passion"
+      ],
+      "vibe_tags": [
+        "pop",
+        "electronic",
+        "edgy",
+        "sensual"
+      ],
+      "style_tags": [
+        "pop",
+        "dance-pop",
+        "electropop"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from temptation to irresistible surrender",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 8,
+      "familiarity_seniors": 4,
+      "lyrics_summary": "The lyrics describe the allure and danger of a toxic romantic relationship, portraying love as an addictive and harmful force that the narrator cannot resist despite knowing the risks.",
+      "recommended_set_context": "Energetic pop set or dance-inspired segment",
+      "comment_for_performer": "Focus on conveying the tension between desire and danger with dynamic phrasing and rhythmic drive."
+    }
+  },
+  "369": {
+    "_version": 2,
+    "title": "STAY STAY STAY",
+    "artist": "Taylor Swift",
+    "data": {
+      "mood_words": [
+        "playful",
+        "hopeful",
+        "romantic"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 120,
+      "primary_era": "2010s",
+      "release_decade": "2010s",
+      "lyrical_themes": [
+        "relationship ups and downs",
+        "commitment",
+        "forgiveness",
+        "love persistence"
+      ],
+      "vibe_tags": [
+        "cheerful",
+        "intimate",
+        "lighthearted"
+      ],
+      "style_tags": [
+        "pop",
+        "country pop"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": false,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from playful frustration to hopeful reconciliation",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 7,
+      "familiarity_seniors": 3,
+      "lyrics_summary": "The lyrics describe a couple navigating small conflicts and misunderstandings but ultimately choosing to stay together and work through their issues with a sense of humor and affection.",
+      "recommended_set_context": "Great for a light, upbeat moment in a contemporary pop set.",
+      "comment_for_performer": "Keep the rhythm bouncy and playful to capture the song’s affectionate teasing tone."
+    }
+  },
+  "370": {
+    "_version": 2,
+    "title": "BLANK SPACE",
+    "artist": "Taylor Swift",
+    "data": {
+      "mood_words": [
+        "playful",
+        "sarcastic",
+        "dramatic"
+      ],
+      "energy": "high",
+      "tempo_label": "fast",
+      "tempo_bpm_guess": 120,
+      "primary_era": "2010s",
+      "release_decade": "2010s",
+      "lyrical_themes": [
+        "romantic relationships",
+        "fame",
+        "self-awareness",
+        "heartbreak"
+      ],
+      "vibe_tags": [
+        "pop",
+        "satirical",
+        "catchy",
+        "edgy"
+      ],
+      "style_tags": [
+        "pop",
+        "electropop"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from flirtatious excitement to ironic detachment",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 9,
+      "familiarity_seniors": 4,
+      "lyrics_summary": "The lyrics portray a playful but cynical view of romantic relationships, highlighting the excitement and drama of new love while acknowledging the inevitable heartbreak and chaos that follows. It uses vivid imagery to depict a persona who is aware of their reputation and the fleeting nature of romance.",
+      "recommended_set_context": "Great for an energetic, engaging pop set highlight.",
+      "comment_for_performer": "Emphasize the dynamic shifts and playful sarcasm; keep the rhythm driving and crisp."
+    }
+  },
+  "371": {
+    "_version": 2,
+    "title": "CHIM CHIM CHER-EE",
+    "artist": "Mary Poppins",
+    "data": {
+      "mood_words": [
+        "whimsical",
+        "nostalgic",
+        "cheerful"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 100,
+      "primary_era": "1960s",
+      "release_decade": "1960s",
+      "lyrical_themes": [
+        "luck",
+        "magic",
+        "urban folklore",
+        "hope"
+      ],
+      "vibe_tags": [
+        "playful",
+        "storybook",
+        "charming"
+      ],
+      "style_tags": [
+        "showtune",
+        "musical theater",
+        "folk"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from curiosity to warm optimism",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": true,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics tell the story of a magical chimney sweep who brings good luck and happiness, using whimsical imagery of London streets and the charm of old urban legends to evoke a hopeful and enchanting atmosphere.",
+      "recommended_set_context": "Ideal for a lighthearted musical theater or family-friendly segment.",
+      "comment_for_performer": "Focus on clear articulation and a playful touch to capture the song’s charm and storytelling essence."
+    }
+  },
+  "372": {
+    "_version": 2,
+    "title": "JOLLY HOLIDAY",
+    "artist": "Mary Poppins",
+    "data": {
+      "mood_words": [
+        "cheerful",
+        "whimsical",
+        "uplifting"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 110,
+      "primary_era": "1960s",
+      "release_decade": "1960s",
+      "lyrical_themes": [
+        "joyful outing",
+        "nature",
+        "friendship",
+        "fantasy"
+      ],
+      "vibe_tags": [
+        "playful",
+        "bright",
+        "storybook"
+      ],
+      "style_tags": [
+        "showtune",
+        "musical",
+        "classic pop"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "starts light and joyful, maintains a playful charm",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": true,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics describe a delightful and magical day spent outdoors, filled with charming encounters and a carefree spirit. It paints a picture of an ideal, happy outing that feels both whimsical and heartwarming.",
+      "recommended_set_context": "Perfect for a lighthearted, nostalgic moment in a set.",
+      "comment_for_performer": "Emphasize the playful, buoyant rhythm and keep the mood bright to capture the song’s cheerful spirit."
+    }
+  },
+  "373": {
+    "_version": 2,
+    "title": "STAY AWAKE",
+    "artist": "Mary Poppins",
+    "data": {
+      "mood_words": [
+        "gentle",
+        "soothing",
+        "calm"
+      ],
+      "energy": "low",
+      "tempo_label": "slow",
+      "tempo_bpm_guess": 60,
+      "primary_era": "1960s",
+      "release_decade": "1960s",
+      "lyrical_themes": [
+        "comfort",
+        "reassurance",
+        "bedtime",
+        "love"
+      ],
+      "vibe_tags": [
+        "lullaby",
+        "tender",
+        "nostalgic"
+      ],
+      "style_tags": [
+        "showtune",
+        "musical theater",
+        "ballad"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from gentle reassurance to peaceful rest",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": true,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics encourage staying awake gently while offering comfort and calm, evoking a soothing bedtime atmosphere filled with warmth and care.",
+      "recommended_set_context": "Ideal for a quiet, intimate moment or lullaby segment.",
+      "comment_for_performer": "Focus on soft dynamics and smooth phrasing to convey tenderness and calm."
+    }
+  },
+  "374": {
+    "_version": 2,
+    "title": "SISTER SUFFRAGATE",
+    "artist": "Mary Poppins",
+    "data": {
+      "mood_words": [
+        "empowered",
+        "determined",
+        "spirited"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 100,
+      "primary_era": "2010s",
+      "release_decade": "2010s",
+      "lyrical_themes": [
+        "women's rights",
+        "activism",
+        "social change",
+        "sisterhood"
+      ],
+      "vibe_tags": [
+        "uplifting",
+        "protest",
+        "theatrical"
+      ],
+      "style_tags": [
+        "showtune",
+        "musical theater",
+        "folk"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from frustration to hopeful resolve",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": true,
+      "familiarity_teens": 4,
+      "familiarity_seniors": 3,
+      "lyrics_summary": "The lyrics tell the story of a woman passionately advocating for women's suffrage, expressing frustration with societal constraints while rallying others to join the fight for equality and rights.",
+      "recommended_set_context": "Use as a powerful, character-driven moment in a musical set.",
+      "comment_for_performer": "Focus on clear storytelling and dynamic shifts to convey the character's passion and determination."
+    }
+  },
+  "375": {
+    "_version": 2,
+    "title": "THE LIFE I LEAD",
+    "artist": "Mary Poppins",
+    "data": {
+      "mood_words": [
+        "cheerful",
+        "proud",
+        "orderly"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 110,
+      "primary_era": "1960s",
+      "release_decade": "1960s",
+      "lyrical_themes": [
+        "routine",
+        "self-identity",
+        "responsibility",
+        "discipline"
+      ],
+      "vibe_tags": [
+        "theatrical",
+        "lighthearted",
+        "character-driven"
+      ],
+      "style_tags": [
+        "showtune",
+        "musical theatre",
+        "classic"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "confident and upbeat with a touch of humor",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": true,
+      "familiarity_teens": 3,
+      "familiarity_seniors": 7,
+      "lyrics_summary": "The lyrics describe a character confidently outlining their structured, disciplined daily life with pride and a sense of duty. It conveys a humorous yet earnest portrayal of routine and self-assurance in one's role.",
+      "recommended_set_context": "Ideal for a theatrical or character-driven segment in a set.",
+      "comment_for_performer": "Emphasize clear diction and playful phrasing to capture the character's pride and wit."
+    }
+  },
+  "376": {
+    "_version": 2,
+    "title": "LETS GO FLY A KITE",
+    "artist": "Mary Poppins",
+    "data": {
+      "mood_words": [
+        "joyful",
+        "uplifting",
+        "playful"
+      ],
+      "energy": "medium",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 110,
+      "primary_era": "1960s",
+      "release_decade": "1960s",
+      "lyrical_themes": [
+        "family bonding",
+        "outdoor fun",
+        "childhood joy",
+        "simple pleasures"
+      ],
+      "vibe_tags": [
+        "whimsical",
+        "nostalgic",
+        "cheerful"
+      ],
+      "style_tags": [
+        "showtune",
+        "musical theater",
+        "classic pop"
+      ],
+      "suitable_for_background": true,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 4,
+      "emotional_arc": "from gentle encouragement to joyful celebration",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": true,
+      "familiarity_teens": 4,
+      "familiarity_seniors": 8,
+      "lyrics_summary": "The lyrics invite listeners to enjoy a carefree moment by flying a kite, symbolizing freedom and happiness shared with loved ones. It encourages stepping outside, embracing simple joys, and creating lasting memories together.",
+      "recommended_set_context": "Ideal for uplifting moments or family-friendly sets.",
+      "comment_for_performer": "Maintain a light, buoyant touch to capture the song’s playful spirit; emphasize clear phrasing to convey its cheerful message."
+    }
+  },
+  "377": {
+    "_version": 2,
+    "title": "ROADIE",
+    "artist": "Tenacious D",
+    "data": {
+      "mood_words": [
+        "humorous",
+        "energetic",
+        "irreverent"
+      ],
+      "energy": "high",
+      "tempo_label": "fast",
+      "tempo_bpm_guess": 140,
+      "primary_era": "2000s",
+      "release_decade": "2000s",
+      "lyrical_themes": [
+        "rock lifestyle",
+        "roadie life",
+        "band culture",
+        "comedy"
+      ],
+      "vibe_tags": [
+        "satirical",
+        "playful",
+        "raunchy",
+        "rock"
+      ],
+      "style_tags": [
+        "comedy rock",
+        "hard rock",
+        "alternative"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "starts playful and boastful, ends with humorous exaggeration",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 6,
+      "familiarity_seniors": 3,
+      "lyrics_summary": "The lyrics humorously depict the life and exploits of a rock band's roadie, highlighting the backstage antics, hard work, and wild lifestyle that come with supporting a touring band. It mixes bravado with comedic exaggeration, portraying the roadie as a larger-than-life character.",
+      "recommended_set_context": "Play as a high-energy, comedic highlight to engage the audience.",
+      "comment_for_performer": "Emphasize the humor and energy; use dynamic contrasts to bring out the song’s playful attitude."
+    }
+  },
+  "378": {
+    "_version": 2,
+    "title": "WONDERBOY",
+    "artist": "Tenacious D",
+    "data": {
+      "mood_words": [
+        "epic",
+        "heroic",
+        "playful"
+      ],
+      "energy": "high",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 120,
+      "primary_era": "2000s",
+      "release_decade": "2000s",
+      "lyrical_themes": [
+        "heroism",
+        "fantasy",
+        "self-empowerment",
+        "mythical adventure"
+      ],
+      "vibe_tags": [
+        "comedic",
+        "rock",
+        "dramatic",
+        "quirky"
+      ],
+      "style_tags": [
+        "rock",
+        "comedy rock",
+        "folk rock"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from humble origins to triumphant heroism",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": true,
+      "familiarity_teens": 7,
+      "familiarity_seniors": 3,
+      "lyrics_summary": "The lyrics tell the story of a young hero with magical powers destined to save the world. It mixes grandiose fantasy imagery with humorous and self-aware storytelling, celebrating courage and mythical strength.",
+      "recommended_set_context": "Great for a high-energy, theatrical moment in the set.",
+      "comment_for_performer": "Emphasize dynamic shifts and playful timing to capture the song's humor and epic feel."
+    }
+  },
+  "379": {
+    "_version": 2,
+    "title": "TRIBUTE",
+    "artist": "Tenacious D",
+    "data": {
+      "mood_words": [
+        "playful",
+        "epic",
+        "humorous"
+      ],
+      "energy": "high",
+      "tempo_label": "medium",
+      "tempo_bpm_guess": 120,
+      "primary_era": "2000s",
+      "release_decade": "2000s",
+      "lyrical_themes": [
+        "heroism",
+        "storytelling",
+        "music legend",
+        "humor"
+      ],
+      "vibe_tags": [
+        "comedic",
+        "rock",
+        "dramatic",
+        "tongue-in-cheek"
+      ],
+      "style_tags": [
+        "rock",
+        "comedy rock",
+        "folk rock"
+      ],
+      "suitable_for_background": false,
+      "suitable_for_showpiece": true,
+      "difficulty": "medium",
+      "tech_difficulty_solo_piano": 5,
+      "emotional_arc": "from awe and tension to humorous relief",
+      "time_signature": "4/4",
+      "is_waltz": false,
+      "is_movie_or_musical_song": false,
+      "familiarity_teens": 7,
+      "familiarity_seniors": 4,
+      "lyrics_summary": "The lyrics tell a humorous and exaggerated tale of the duo encountering a powerful demon and playing the greatest song ever to save themselves, though they can't remember the actual song, so this is just a tribute to it.",
+      "recommended_set_context": "Use as a high-energy, comedic showstopper.",
+      "comment_for_performer": "Emphasize the dramatic shifts and comedic timing to capture the song's playful storytelling."
+    }
   }
 }
